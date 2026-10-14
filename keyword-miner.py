@@ -77,13 +77,17 @@ def generate_keyword_list(base_keyword, verbose=False):
 
 #main program
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Mine expanded keyword search results.")
+    parser.add_argument("seed", help="Seed keyword phrase to expand and mine.")
+    args = parser.parse_args()
 
-    #change this to whatever keyword you want
-    BASE_KEYWORD = "demonology in the book of enoch"
+    # Automatically expand the seed keyword and fetch top ranking pages via Bright Data
+    harvested_queries = generate_keyword_list(args.seed, verbose=True)
 
-    #create a full list of keywords and search results
-    harvested_queries = generate_keyword_list(BASE_KEYWORD, verbose=True)
+    filename = args.seed.replace(" ", "-")
 
-    #dump the harvested queries to a json file
-    with open("output.json", "w", encoding="utf-8") as file:
+    # Dump the harvested queries to a json file
+    with open(f"{filename}.json", "w", encoding="utf-8") as file:
         json.dump(harvested_queries, file, indent=4, ensure_ascii=False)
+
+    print(f"\nDone! Results saved to output.json")
