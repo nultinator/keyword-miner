@@ -90,4 +90,4 @@ if __name__ == "__main__":
     with open(f"{filename}.json", "w", encoding="utf-8") as file:
         json.dump(harvested_queries, file, indent=4, ensure_ascii=False)
 
-    print(f"\nDone! Results saved to output.json")
+    print(f"\nDone! Results saved to {filename}.json")
